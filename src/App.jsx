@@ -1,5 +1,7 @@
+import { Landing } from './pages';
+
 function App() {
-  return <h1>hi</h1>;
+  return <Landing />;
 }
 
 export default App;
