@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import main from '../images/main.svg';
 import { Logo } from '../components';
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
   return (
@@ -18,7 +19,9 @@ const Landing = () => {
             track, and delete job entries with ease. Never miss an opportunity
             and stay on top of your job search.
           </p>
-          <button className="btn btn-hero">login / register</button>
+          <Link to="/register" className="btn btn-hero">
+            login / register
+          </Link>
         </div>
         <img src={main} alt="main image" className="img main-img" />
       </div>
