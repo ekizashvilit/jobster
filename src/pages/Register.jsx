@@ -26,19 +26,15 @@ const Register = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
     const { name, email, password, isMember } = values;
-
     if (!email || !password || (!isMember && !name)) {
       toast.error('Please fill out all fields');
       return;
     }
-
     if (isMember) {
       dispatch(loginUser({ email: email, password: password }));
       return;
     }
-
     dispatch(registerUser({ name, email, password }));
   };
 
@@ -50,7 +46,8 @@ const Register = () => {
     <Wrapper className="full-page">
       <form className="form" onSubmit={onSubmit}>
         <Logo />
-        <h3>{values.isMember ? 'login' : 'register'}</h3>
+        <h3>{values.isMember ? 'Login' : 'Register'}</h3>
+        {/* name field */}
         {!values.isMember && (
           <FormRow
             type="text"
@@ -59,24 +56,38 @@ const Register = () => {
             handleChange={handleChange}
           />
         )}
+        {/* email field */}
         <FormRow
           type="email"
           name="email"
           value={values.email}
           handleChange={handleChange}
         />
+        {/* password field */}
         <FormRow
           type="password"
           name="password"
           value={values.password}
           handleChange={handleChange}
         />
-        <button type="submit" className="btn btn-block">
-          {values.isMember ? 'login' : 'register'}
+        <button type="submit" className="btn btn-block" disabled={isLoading}>
+          {isLoading ? 'loading...' : 'submit'}
+        </button>
+        <button
+          type="button"
+          className="btn btn-block btn-hipster"
+          disabled={isLoading}
+          onClick={() =>
+            dispatch(
+              loginUser({ email: 'testUser@test.com', password: 'secret' })
+            )
+          }
+        >
+          {isLoading ? 'loading...' : 'demo app'}
         </button>
         <p>
           {values.isMember ? 'Not a member yet?' : 'Already a member?'}
-          <button onClick={toggleMember} className="member-btn">
+          <button type="button" onClick={toggleMember} className="member-btn">
             {values.isMember ? 'Register' : 'Login'}
           </button>
         </p>
