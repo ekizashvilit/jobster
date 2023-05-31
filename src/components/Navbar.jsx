@@ -1,7 +1,40 @@
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
+import Logo from './Logo';
 
 const Navbar = () => {
-  return <Wrapper>Navbar</Wrapper>;
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  return (
+    <Wrapper>
+      <div className="nav-center">
+        <button className="toggle-btn" onClick={() => console.log('sidebar')}>
+          <FaAlignLeft />
+        </button>
+        <div>
+          <Logo />
+          <h3 className="logo-text">dashboard</h3>
+        </div>
+        <div className="btn-container">
+          <button className="btn" onClick={() => console.log('logout dd')}>
+            <FaUserCircle />
+            {user?.name}
+            <FaCaretDown />
+          </button>
+          <div className="dropdown show-dropdown">
+            <button
+              className="dropdown-btn"
+              onClick={() => console.log('logout')}
+            >
+              logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.nav`
