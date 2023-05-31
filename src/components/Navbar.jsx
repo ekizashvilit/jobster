@@ -2,15 +2,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 import Logo from './Logo';
+import { toggleSidebar } from '../features/user/userSlice';
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const toggle = () => {
+    dispatch(toggleSidebar());
+  };
 
   return (
     <Wrapper>
       <div className="nav-center">
-        <button className="toggle-btn" onClick={() => console.log('sidebar')}>
+        <button className="toggle-btn" onClick={toggle}>
           <FaAlignLeft />
         </button>
         <div>
