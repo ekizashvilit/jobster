@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 import Logo from './Logo';
 import { toggleSidebar } from '../features/user/userSlice';
+import { useState } from 'react';
 
 const Navbar = () => {
+  const [showLogout, setShowLogout] = useState(false);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const toggle = () => {
@@ -22,12 +24,12 @@ const Navbar = () => {
           <h3 className="logo-text">dashboard</h3>
         </div>
         <div className="btn-container">
-          <button className="btn" onClick={() => console.log('logout dd')}>
+          <button className="btn" onClick={() => setShowLogout(!showLogout)}>
             <FaUserCircle />
             {user?.name}
             <FaCaretDown />
           </button>
-          <div className="dropdown show-dropdown">
+          <div className={showLogout ? 'dropdown show-dropdown' : 'dropdown'}>
             <button
               className="dropdown-btn"
               onClick={() => console.log('logout')}
