@@ -1,7 +1,8 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { FormRow, FormRowSelect } from '../../components';
+import { handleChange } from '../../features/job/jobSlice';
 
 const AddJob = () => {
   const {
@@ -16,6 +17,7 @@ const AddJob = () => {
     isEditing,
     editJobId,
   } = useSelector((store) => store.job);
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ const AddJob = () => {
     const name = e.target.name;
     const value = e.target.value;
 
-    console.log(name, value);
+    dispatch(handleChange({ name, value }));
   };
 
   return (
@@ -81,7 +83,7 @@ const AddJob = () => {
             <button
               type="submit"
               className="btn btn-block submit-btn"
-              onClick={() => console.log('submit')}
+              onClick={handleSubmit}
               disabled={isLoading}
             >
               submit
