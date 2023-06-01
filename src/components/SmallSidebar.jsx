@@ -3,6 +3,8 @@ import { FaTimes } from 'react-icons/fa';
 import Logo from './Logo';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../features/user/userSlice';
+import links from '../utils/links';
+import { NavLink } from 'react-router-dom';
 
 const SmallSidebar = () => {
   const { isSidebarOpen } = useSelector((store) => store.user);
@@ -26,7 +28,26 @@ const SmallSidebar = () => {
           <header>
             <Logo />
           </header>
-          <div className="nav-links">nav links</div>
+          <div className="nav-links">
+            {links.map((link) => {
+              const { icon, id, text, path } = link;
+
+              return (
+                <NavLink
+                  to={path}
+                  key={id}
+                  onClick={toggleSidebar}
+                  className={({ isActive }) =>
+                    isActive ? 'nav-link active' : 'nav-link'
+                  }
+                  end
+                >
+                  <span className="icon">{icon}</span>
+                  {text}
+                </NavLink>
+              );
+            })}
+          </div>
         </div>
       </div>
     </Wrapper>
