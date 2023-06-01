@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
-import { FormRow } from '../../components';
+import { FormRow, FormRowSelect } from '../../components';
 
 const AddJob = () => {
   const {
@@ -56,6 +56,19 @@ const AddJob = () => {
             value={jobLocation}
             labelText="job location"
             handleChange={handleJobInput}
+          />
+          <FormRowSelect
+            name="status"
+            value={status}
+            handleChange={handleJobInput}
+            list={statusOptions}
+          />
+          <FormRowSelect
+            name="jobType"
+            labelText="job type"
+            value={jobType}
+            handleChange={handleJobInput}
+            list={jobTypeOptions}
           />
           <div className="btn-container">
             <button
