@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import FormRow from './FormRow';
 import FormRowSelect from './FormRowSelect';
+import { handleChange, clearFilters } from '../features/allJobs/allJobsSlice';
 
 const SearchContainer = () => {
   const {
@@ -15,9 +16,12 @@ const SearchContainer = () => {
   const { jobTypeOptions, statusOptions } = useSelector((store) => store.job);
   const dispatch = useDispatch();
 
-  const handleSearch = (e) => {};
+  const handleSearch = (e) => {
+    dispatch(handleChange({ name: e.target.name, value: e.target.value }));
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(clearFilters());
   };
 
   return (
